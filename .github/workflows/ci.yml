@@ -30,7 +30,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6
       - name: Board model, Open Board Format, scanning and prediction tests
         run: ./gradlew :core:check
       - name: Test report
@@ -51,7 +51,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
-      - uses: gradle/actions/setup-gradle@v5
+      - uses: gradle/actions/setup-gradle@v6
       - name: Release version and changelog agree
         run: python3 scripts/check_version.py
       - name: Lint
