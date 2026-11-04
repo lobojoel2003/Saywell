@@ -1,14 +1,17 @@
 name: Release
 
-# Publish a release by pushing a version tag that matches version.properties:
+# Publish a release in either of two ways (see docs/releasing.md):
 #
-#   git tag -a v0.1.0 -m "Saywell 0.1.0" && git push origin v0.1.0
+#   - push a version tag that matches version.properties:
+#       git tag -a v0.1.0 -m "Saywell 0.1.0" && git push origin v0.1.0
+#   - or open Actions > Release > Run workflow on main; the tag v<version> is created with the release.
 #
 # CI runs first. Then the APKs are built, signed and attached to a GitHub Release whose notes come
-# from CHANGELOG.md. See docs/releasing.md for setting up the signing key.
+# from CHANGELOG.md.
 on:
   push:
     tags: ["v*.*.*"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -33,8 +36,22 @@ jobs:
       SAYWELL_BUILD_NUMBER: ${{ github.run_number }}
     steps:
       - uses: actions/checkout@v7
+      - name: Release tag
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            if [ "$GITHUB_REF" != refs/heads/main ]; then echo "::error::Run releases from main"; exit 1; fi
+            version="$(sed -n 's/^version=//p' version.properties)"
+            tag="v$version"
+            if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null; then
+              echo "::error::$tag already exists. Bump version.properties first."; exit 1
+            fi
+          else
+            tag="$GITHUB_REF_NAME"
+          fi
+          echo "TAG=$tag" >> "$GITHUB_ENV"
+          echo "Releasing $tag"
       - name: Tag matches version.properties and CHANGELOG.md
-        run: python3 scripts/check_version.py "$GITHUB_REF_NAME"
+        run: python3 scripts/check_version.py "$TAG"
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
@@ -81,7 +98,7 @@ jobs:
 
       - name: Collect, verify and checksum
         run: |
-          version="${GITHUB_REF_NAME#v}"
+          version="${TAG#v}"
           mkdir -p dist
           for apk in app/build/outputs/apk/release/app-*-release.apk; do
             abi="$(basename "$apk" | sed -E 's/^app-(.*)-release\.apk$/\1/')"
@@ -94,8 +111,8 @@ jobs:
 
       - name: Release notes
         run: |
-          python3 scripts/release_notes.py "$GITHUB_REF_NAME" > release-notes.md
-          version="${GITHUB_REF_NAME#v}"
+          python3 scripts/release_notes.py "$TAG" > release-notes.md
+          version="${TAG#v}"
           fingerprint="$(grep -m1 'SHA-256 digest' signing.txt | sed 's/.*: //')"
           {
             echo
@@ -124,7 +141,9 @@ jobs:
 
       - uses: softprops/action-gh-release@v3
         with:
-          name: Saywell ${{ github.ref_name }}
+          tag_name: ${{ env.TAG }}
+          target_commitish: ${{ github.sha }}
+          name: Saywell ${{ env.TAG }}
           body_path: release-notes.md
           files: |
             dist/*.apk

@@ -22,18 +22,18 @@
 3. In [`CHANGELOG.md`](../CHANGELOG.md), rename **Unreleased** to `## [X.Y.Z] - YYYY-MM-DD`, add a
    new empty **Unreleased** section above it, and update the comparison links at the bottom.
 4. Commit (`release: X.Y.Z`) and push to `main`.
-5. Tag and push the tag:
+5. Start the release, either:
+   - **from GitHub:** **Actions › Release › Run workflow** on `main`. The workflow creates the tag
+     `vX.Y.Z` from `version.properties` together with the release; or
+   - **with git:** tag and push the tag.
 
-   ```bash
-   git tag -a vX.Y.Z -m "Saywell X.Y.Z"
-   ```
+     ```bash
+     git tag -a vX.Y.Z -m "Saywell X.Y.Z"
+     ```
 
-   ```bash
-   git push origin vX.Y.Z
-   ```
-
-   Or create the release from GitHub's web interface (**Releases › Draft a new release**, new tag
-   `vX.Y.Z` on `main`); the workflow runs on the tag either way and fills in the release.
+     ```bash
+     git push origin vX.Y.Z
+     ```
 
 The [Release workflow](../.github/workflows/release.yml) then:
 
