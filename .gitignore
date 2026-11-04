@@ -1,0 +1,29 @@
+# Gradle (build output folders only, not source packages named "build")
+.gradle/
+/build/
+/*/build/
+.kotlin/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Android
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Signing material never belongs in the repository
+*.jks
+*.keystore
+*.p12
+keystore.properties
+
+# IDEs and OS files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
