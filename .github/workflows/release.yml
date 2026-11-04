@@ -1,0 +1,133 @@
+name: Release
+
+# Publish a release by pushing a version tag that matches version.properties:
+#
+#   git tag -a v0.1.0 -m "Saywell 0.1.0" && git push origin v0.1.0
+#
+# CI runs first. Then the APKs are built, signed and attached to a GitHub Release whose notes come
+# from CHANGELOG.md. See docs/releasing.md for setting up the signing key.
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    name: CI
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    name: Build, sign and publish
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    env:
+      SAYWELL_BUILD_NUMBER: ${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Tag matches version.properties and CHANGELOG.md
+        run: python3 scripts/check_version.py "$GITHUB_REF_NAME"
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v5
+
+      - name: Signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.SAYWELL_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.SAYWELL_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.SAYWELL_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.SAYWELL_KEY_PASSWORD }}
+        run: |
+          keystore="$RUNNER_TEMP/saywell-release.jks"
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 --decode > "$keystore"
+            {
+              echo "SAYWELL_KEYSTORE_FILE=$keystore"
+              echo "SAYWELL_KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD"
+              echo "SAYWELL_KEY_ALIAS=$KEY_ALIAS"
+              echo "SAYWELL_KEY_PASSWORD=${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
+              echo "SIGNING=project"
+            } >> "$GITHUB_ENV"
+          else
+            # No signing secrets yet: sign with a one-off key so the APKs install. Updates to this
+            # release will need the same key, so set up the secrets (docs/releasing.md) for stable releases.
+            echo "::warning::SAYWELL_KEYSTORE_BASE64 is not set; signing with a temporary key."
+            password="$(openssl rand -hex 24)"
+            keytool -genkeypair -keystore "$keystore" -storetype PKCS12 -storepass "$password" \
+              -alias saywell -keyalg RSA -keysize 4096 -validity 10000 \
+              -dname "CN=Saywell temporary release key" >/dev/null
+            echo "::add-mask::$password"
+            {
+              echo "SAYWELL_KEYSTORE_FILE=$keystore"
+              echo "SAYWELL_KEYSTORE_PASSWORD=$password"
+              echo "SAYWELL_KEY_ALIAS=saywell"
+              echo "SAYWELL_KEY_PASSWORD=$password"
+              echo "SIGNING=temporary"
+            } >> "$GITHUB_ENV"
+          fi
+
+      - name: Build signed APKs
+        run: ./gradlew :app:assembleRelease
+
+      - name: Collect, verify and checksum
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          mkdir -p dist
+          for apk in app/build/outputs/apk/release/app-*-release.apk; do
+            abi="$(basename "$apk" | sed -E 's/^app-(.*)-release\.apk$/\1/')"
+            cp "$apk" "dist/Saywell-$version-$abi.apk"
+          done
+          apksigner="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)/apksigner"
+          "$apksigner" verify --print-certs "dist/Saywell-$version-universal.apk" | tee signing.txt
+          (cd dist && sha256sum *.apk > SHA256SUMS.txt && cat SHA256SUMS.txt)
+          ls -l dist
+
+      - name: Release notes
+        run: |
+          python3 scripts/release_notes.py "$GITHUB_REF_NAME" > release-notes.md
+          version="${GITHUB_REF_NAME#v}"
+          fingerprint="$(grep -m1 'SHA-256 digest' signing.txt | sed 's/.*: //')"
+          {
+            echo
+            echo "### Install"
+            echo
+            echo "Download one APK and open it on the Android phone or tablet (allow installing from your browser or file manager when asked):"
+            echo
+            echo "| File | For |"
+            echo "|---|---|"
+            echo "| \`Saywell-$version-arm64-v8a.apk\` | Most phones and tablets from the last few years |"
+            echo "| \`Saywell-$version-armeabi-v7a.apk\` | Older or low-cost 32-bit devices |"
+            echo "| \`Saywell-$version-x86_64.apk\` | Chromebooks and emulators |"
+            echo "| \`Saywell-$version-universal.apk\` | Any device, if you're not sure (larger download) |"
+            echo
+            echo "Android 7.0 or newer. Saywell works without internet; the English voice is built in."
+            echo
+            echo "Signing certificate SHA-256: \`$fingerprint\`"
+            if [ "$SIGNING" = "temporary" ]; then
+              echo
+              echo "> [!NOTE]"
+              echo "> These APKs are signed with a temporary key. A later release signed with the project key"
+              echo "> will need Saywell to be uninstalled first, so use **Settings › Back up all boards** before updating."
+            fi
+          } >> release-notes.md
+          cat release-notes.md
+
+      - uses: softprops/action-gh-release@v3
+        with:
+          name: Saywell ${{ github.ref_name }}
+          body_path: release-notes.md
+          files: |
+            dist/*.apk
+            dist/SHA256SUMS.txt
+          fail_on_unmatched_files: true
+          make_latest: "true"

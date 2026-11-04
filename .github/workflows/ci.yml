@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+    tags-ignore: ["**"]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Shown on the About screen of CI builds.
+  SAYWELL_BUILD_NUMBER: ${{ github.run_number }}
+
+jobs:
+  core:
+    name: Core library
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Board model, Open Board Format, scanning and prediction tests
+        run: ./gradlew :core:check
+      - name: Test report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: core-test-report
+          path: core/build/reports/tests/
+          if-no-files-found: ignore
+
+  app:
+    name: Android app
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Release version and changelog agree
+        run: python3 scripts/check_version.py
+      - name: Lint
+        run: ./gradlew :app:lintRelease --continue
+      - name: Lint findings
+        if: failure()
+        run: find app/build -name 'lint-results*.txt' -exec cat {} \; || true
+      - name: Unit and UI tests (Robolectric)
+        if: ${{ !cancelled() }}
+        run: ./gradlew :app:testDebugUnitTest --continue
+      - name: Screenshots
+        if: ${{ !cancelled() }}
+        run: ./gradlew :app:testDebugUnitTest --tests '*ScreenshotTest' -Psaywell.screenshots=true
+      - name: Upload screenshots
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: app/build/screenshots/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Build APKs
+        if: ${{ !cancelled() }}
+        run: ./gradlew :app:assembleDebug :app:assembleRelease
+      - name: APK sizes
+        if: ${{ !cancelled() }}
+        run: ls -l app/build/outputs/apk/*/*.apk
+      - name: Debug APKs
+        uses: actions/upload-artifact@v7
+        with:
+          name: saywell-debug-apks
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14
+      - name: Lint and test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-reports
+          path: |
+            app/build/reports/
+            app/build/test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  voices:
+    name: Voice download links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Every voice in the catalog can be downloaded
+        run: python3 scripts/check_voice_catalog.py
