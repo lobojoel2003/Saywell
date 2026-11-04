@@ -1,0 +1,54 @@
+name: Something isn't working
+description: Report a problem with Saywell
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. Please don't include personal information about the person who uses Saywell.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to make it happen again
+      placeholder: |
+        1. Open …
+        2. Tap …
+  - type: input
+    id: version
+    attributes:
+      label: Saywell version
+      description: Settings › About Saywell
+      placeholder: "0.1.0 (build 100)"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: "Samsung Galaxy Tab A7 Lite, Android 14"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of Saywell?
+      options:
+        - Talking and boards
+        - Editing
+        - Voices and speech
+        - Switch scanning
+        - Touch settings
+        - Importing or exporting boards
+        - Something else
+  - type: textarea
+    id: switches
+    attributes:
+      label: Switch or other access hardware (if relevant)
+      placeholder: "Bluetooth switch interface, two switches"

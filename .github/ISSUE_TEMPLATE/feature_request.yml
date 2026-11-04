@@ -1,0 +1,19 @@
+name: Idea or request
+description: Suggest something that would help someone communicate
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What would help?
+      description: Describe the situation and who it would help (for example a child who uses one switch, or a teacher setting up boards).
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How could Saywell do it?
+  - type: textarea
+    id: elsewhere
+    attributes:
+      label: Does another AAC app do this?

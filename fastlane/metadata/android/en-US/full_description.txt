@@ -1,0 +1,18 @@
+<p>Saywell is a free, open-source AAC (augmentative and alternative communication) app for people who communicate with symbols. Tap pictures to build a sentence and Saywell says it out loud with a natural voice that runs on the device.</p>
+
+<p><b>Works without internet.</b> Everything runs on the phone or tablet, including the neural voice. No account, no subscription, no tracking.</p>
+
+<ul>
+<li>A starter vocabulary of core words and topic boards, colour-coded like most AAC systems</li>
+<li>A message bar that builds the sentence with its symbols, and speaks each word as it is tapped</li>
+<li>A natural offline voice built in (Piper, run by Sherpa-ONNX); more voices and languages can be downloaded once or installed from a file; the phone's own voices work too</li>
+<li>Edit everything: words, what they say, colours, 2,456 OpenMoji symbols, photos, links between boards, board sizes up to 12 × 12, hidden buttons, undo</li>
+<li>Switch scanning with one or two switches, row/column or linear, adjustable speed, auditory scanning, and "tap anywhere"</li>
+<li>Hold to select and ignore repeated presses for people with tremors</li>
+<li>Type to talk with word prediction, and recent sentences</li>
+<li>Large text, light, dark and high-contrast themes, TalkBack and Switch Access labels</li>
+<li>Import and export boards in the Open Board Format (.obf, .obz) used by other AAC apps</li>
+<li>Editing and settings can be locked behind a long press</li>
+</ul>
+
+<p>Symbols: OpenMoji (CC BY-SA 4.0). Speech: Sherpa-ONNX (Apache 2.0), ONNX Runtime (MIT), eSpeak NG (GPL 3.0), Piper voices (see each voice's licence in the app).</p>

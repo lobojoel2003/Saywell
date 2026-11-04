@@ -1,0 +1,1 @@
+First release: offline symbol-based talker with a built-in neural voice, starter boards, board editing, switch scanning, touch accommodations, type to talk, and Open Board Format import and export.
