@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Saywell's interface text (English).
+
+    Translations are welcome, but only from people who speak the language well enough to check every
+    string in the app. Machine translations are not accepted. See CONTRIBUTING.md.
+-->
+<resources>
+    <string name="app_name">Saywell</string>
+
+    <!-- Talking screen -->
+    <string name="message_hint">Tap words to build a message</string>
+    <string name="speak_message">Speak the message</string>
+    <string name="speak">Speak</string>
+    <string name="stop_speaking">Stop</string>
+    <string name="delete_word">Delete last word</string>
+    <string name="clear_message">Clear message</string>
+    <string name="back">Back</string>
+    <string name="home">Home board</string>
+    <string name="history">Recent sentences</string>
+    <string name="history_empty">Sentences you speak will appear here.</string>
+    <string name="clear_history">Clear history</string>
+    <string name="keyboard">Type to talk</string>
+    <string name="edit">Edit boards</string>
+    <string name="edit_hold">Edit boards (press and hold)</string>
+    <string name="settings">Settings</string>
+    <string name="settings_hold">Settings (press and hold)</string>
+    <string name="cell_add">Add a button</string>
+    <string name="cell_unnamed">Button without a label</string>
+
+    <!-- Editing -->
+    <string name="editing_board">Editing: %1$s</string>
+    <string name="edit_hint">Tap a button to change it, or an empty space to add one. Press and hold a button to move it.</string>
+    <string name="edit_hint_moving">Now tap where the button should go.</string>
+    <string name="undo">Undo</string>
+    <string name="done">Done</string>
+    <string name="board_settings">Board settings</string>
+    <string name="all_boards">All boards</string>
+    <string name="new_board">New board</string>
+    <string name="board_name">Board name</string>
+    <string name="rows">Rows</string>
+    <string name="columns">Columns</string>
+    <string name="fewer">Fewer %1$s</string>
+    <string name="more_of">More %1$s</string>
+    <string name="make_home">Make this the home board</string>
+    <string name="home_board">Home board</string>
+    <string name="delete_board">Delete this board</string>
+    <string name="delete_board_title">Delete %1$s?</string>
+    <string name="delete_board_body">Buttons that opened this board will stay, but won\'t open anything. You can undo this while editing.</string>
+    <string name="board_deleted">Board deleted</string>
+    <string name="create">Create</string>
+    <plurals name="button_count">
+        <item quantity="one">%d button</item>
+        <item quantity="other">%d buttons</item>
+    </plurals>
+
+    <string name="new_button">New button</string>
+    <string name="edit_button">Edit button</string>
+    <string name="button_label">Label</string>
+    <string name="button_spoken">Say instead (optional)</string>
+    <string name="button_spoken_help">For example, the label \"hi\" could say \"Hello, nice to see you!\"</string>
+    <string name="picture">Picture</string>
+    <string name="no_picture">No picture</string>
+    <string name="symbol">Symbol</string>
+    <string name="photo">Photo</string>
+    <string name="camera">Camera</string>
+    <string name="remove_picture">Remove picture</string>
+    <string name="photo_failed">That picture couldn\'t be used. Try another one.</string>
+    <string name="no_camera">No camera app was found on this device.</string>
+    <string name="colour">Colour</string>
+    <string name="colour_n">Colour %1$d</string>
+    <string name="button_does">When pressed</string>
+    <string name="kind_word">Add the word to the message</string>
+    <string name="kind_folder">Open another board</string>
+    <string name="kind_action">Do something else</string>
+    <string name="open_which_board">Which board?</string>
+    <string name="new_board_choice">A new board</string>
+    <string name="new_board_name">Name of the new board</string>
+    <string name="choose_board_first">Choose a board for this button to open, or name a new one.</string>
+    <string name="action_clear">Clear the message</string>
+    <string name="action_backspace">Delete the last word</string>
+    <string name="action_speak">Speak the message</string>
+    <string name="action_home">Go to the home board</string>
+    <string name="action_back">Go back one board</string>
+    <string name="action_space">Start a new word (for spelling)</string>
+    <string name="action_append">Add an ending to the last word</string>
+    <string name="ending">Ending, for example s or ing</string>
+    <string name="hide_button">Hide while talking</string>
+    <string name="hide_button_help">Keeps the button\'s place but hides it until you\'re ready to use it.</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+
+    <!-- Symbols -->
+    <string name="choose_symbol">Choose a symbol</string>
+    <string name="search_symbols">Search symbols</string>
+    <string name="no_symbols_found">No symbols match. Try another word, or use a photo.</string>
+    <string name="openmoji_credit">Symbols by OpenMoji, the open-source emoji project. CC BY-SA 4.0.</string>
+    <string name="group_feelings">Feelings</string>
+    <string name="group_people">People and body</string>
+    <string name="group_nature">Animals and nature</string>
+    <string name="group_food">Food and drink</string>
+    <string name="group_places">Places and travel</string>
+    <string name="group_activities">Activities</string>
+    <string name="group_things">Things</string>
+    <string name="group_symbols">Signs</string>
+    <string name="group_flags">Flags</string>
+    <string name="group_extras">More symbols</string>
+    <string name="group_more_symbols">Shapes and marks</string>
+
+    <!-- Keyboard -->
+    <string name="keyboard_title">Type to talk</string>
+    <string name="keyboard_hint">Type what you want to say</string>
+    <string name="add_to_message">Add to message</string>
+    <string name="clear_text">Clear text</string>
+    <string name="recent">Recent</string>
+
+    <!-- Settings -->
+    <string name="section_voice">Voice</string>
+    <string name="voice_engine">Voice to use</string>
+    <string name="engine_neural">Saywell voice (offline)</string>
+    <string name="engine_system">The phone\'s voice</string>
+    <string name="saywell_voices">Saywell voices</string>
+    <string name="saywell_voices_summary">Choose, download or install voices that work without internet</string>
+    <string name="phone_voice">Phone voice</string>
+    <string name="phone_voice_default">Default</string>
+    <string name="needs_internet">needs internet</string>
+    <string name="android_tts_settings">Android text-to-speech settings</string>
+    <string name="android_tts_settings_summary">Install the phone\'s voices for offline use</string>
+    <string name="no_tts_settings">This device has no text-to-speech settings screen.</string>
+    <string name="speech_rate">Speaking speed</string>
+    <string name="speech_pitch">Pitch (phone voice only)</string>
+    <string name="test_voice">Test the voice</string>
+    <string name="test_voice_sentence">Hello! This is how I sound.</string>
+
+    <string name="section_talking">Talking</string>
+    <string name="speak_each_button">Say each word when it\'s pressed</string>
+    <string name="speak_each_button_summary">Helps check the right button was chosen</string>
+    <string name="clear_after_speaking">Clear the message after speaking it</string>
+    <string name="speak_folder_names">Say board names when opening them</string>
+    <string name="return_home">Go back home after each word</string>
+    <string name="return_home_summary">Useful when topic boards are visited for one word at a time</string>
+
+    <string name="section_display">Display</string>
+    <string name="labels">Button labels</string>
+    <string name="labels_below">Below the picture</string>
+    <string name="labels_above">Above the picture</string>
+    <string name="labels_hidden">Hidden (pictures only)</string>
+    <string name="text_size">Text size</string>
+    <string name="symbols_in_message">Show pictures in the message</string>
+    <string name="theme">Theme</string>
+    <string name="theme_system">Same as the device</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="high_contrast">High contrast</string>
+    <string name="high_contrast_summary">Bolder outlines and colours for low vision</string>
+    <string name="keep_screen_on">Keep the screen on</string>
+    <string name="keep_screen_on_summary">So the device doesn\'t lock in the middle of a conversation</string>
+
+    <string name="section_touch">Touch</string>
+    <string name="hold_to_select">Hold to select</string>
+    <string name="ignore_repeats">Ignore repeated presses</string>
+    <string name="off">Off</string>
+    <string name="seconds">%1$.1f s</string>
+
+    <string name="section_switches">Switch scanning</string>
+    <string name="use_scanning">Use switch scanning</string>
+    <string name="use_scanning_summary">Choose buttons with one or two switches as the highlight moves</string>
+    <string name="scan_method">Switches</string>
+    <string name="scan_auto">One switch: the highlight moves by itself</string>
+    <string name="scan_step">Two switches: one moves, one chooses</string>
+    <string name="scan_pattern">Scanning order</string>
+    <string name="scan_row_column">Rows first, then buttons</string>
+    <string name="scan_linear">One button at a time</string>
+    <string name="scan_speed">Time on each step</string>
+    <string name="scan_rounds">Pause after</string>
+    <plurals name="rounds">
+        <item quantity="one">%d round</item>
+        <item quantity="other">%d rounds</item>
+    </plurals>
+    <string name="scan_speak">Say each highlighted item</string>
+    <string name="scan_speak_summary">Auditory scanning, for people who can\'t see the screen well</string>
+    <string name="tap_as_switch">Tap anywhere to choose</string>
+    <string name="tap_as_switch_summary">The whole board works as one big switch</string>
+    <string name="select_switch">Choose switch</string>
+    <string name="next_switch">Move switch</string>
+    <string name="keys_are">Keys: %1$s</string>
+    <string name="reset_switch_keys">Reset switch keys</string>
+    <string name="press_switch_now">Press the switch now.</string>
+    <string name="switch_learned">This switch sends: %1$s. Press it again to check, or save.</string>
+
+    <string name="section_boards">Boards</string>
+    <string name="import_boards">Import boards</string>
+    <string name="import_boards_summary">Open Board Format files (.obf, .obz) from Saywell or other AAC apps</string>
+    <string name="import_title">Import boards</string>
+    <string name="import_question">Add the boards from this file to yours, or replace all of your boards with them? Replacing can be undone while editing.</string>
+    <string name="import_add">Add</string>
+    <string name="import_replace">Replace all</string>
+    <string name="import_failed">Import failed: %1$s</string>
+    <string name="import_linked_home">A button for them was added to your home board.</string>
+    <string name="import_find_in_list">Find them in Edit › All boards.</string>
+    <plurals name="imported_boards">
+        <item quantity="one">Imported %d board.</item>
+        <item quantity="other">Imported %d boards.</item>
+    </plurals>
+    <plurals name="pictures_missing">
+        <item quantity="one">%d picture couldn\'t be downloaded.</item>
+        <item quantity="other">%d pictures couldn\'t be downloaded.</item>
+    </plurals>
+    <string name="export_all">Back up all boards</string>
+    <string name="export_all_summary">Saves an .obz file you can keep safe or open in another AAC app</string>
+    <string name="export_board">Share this board</string>
+    <string name="export_board_summary">Saves the current board as an .obf file</string>
+    <string name="export_done">Saved.</string>
+    <string name="export_failed">Couldn\'t save: %1$s</string>
+    <string name="reset_boards">Start again with the starter boards</string>
+    <string name="reset_boards_summary">Replaces your boards with Saywell\'s starter vocabulary</string>
+    <string name="reset_boards_question">Your boards will be replaced. Back them up first if you might want them again.</string>
+    <string name="reset">Replace</string>
+    <string name="reset_done">The starter boards are back.</string>
+
+    <string name="section_safety">Safety</string>
+    <string name="lock_editing">Lock editing and settings</string>
+    <string name="lock_editing_summary">The edit and settings buttons must be held for a moment</string>
+
+    <!-- Voices -->
+    <string name="voices_intro">Saywell voices run on this device and work without internet. Download them once on Wi-Fi, or install a voice file copied from a computer.</string>
+    <string name="on_this_device">On this device</string>
+    <string name="no_voices">No Saywell voices yet. Download one below, or switch to the phone\'s voice in Settings.</string>
+    <string name="download_voices">Download voices</string>
+    <string name="download_voices_summary">Needs internet once. Each voice is about 60 MB.</string>
+    <string name="download">Download</string>
+    <string name="install_from_file">Install from a file</string>
+    <string name="install_from_file_summary">A Sherpa-ONNX Piper voice package (vits-piper-….tar.bz2)</string>
+    <string name="voice_installed">%1$s is ready.</string>
+    <string name="voice_install_failed">The voice could not be installed.</string>
+    <string name="file_unreadable">The file could not be opened.</string>
+    <string name="try_voice">Try %1$s</string>
+    <string name="voice_licence">%1$s licence</string>
+    <string name="delete_voice">Delete %1$s</string>
+    <string name="delete_voice_body">You can download it again later.</string>
+    <string name="gender_female">female</string>
+    <string name="gender_male">male</string>
+    <string name="quality_fast">fast</string>
+    <string name="quality_medium">natural</string>
+    <string name="quality_high">most natural</string>
+    <string name="built_in">built in</string>
+
+    <!-- About -->
+    <string name="about">About Saywell</string>
+    <string name="about_summary">Version, privacy and licences</string>
+    <string name="version_line">Version %1$s (build %2$d)</string>
+    <string name="build_line">CI build %1$s · commit %2$s</string>
+    <string name="about_text">Saywell is a free, open-source talker for people who communicate with symbols. It works without internet, on Android phones and tablets.</string>
+    <string name="privacy">Privacy</string>
+    <string name="privacy_text">Saywell doesn\'t collect, share or send anything. Boards, pictures and recent sentences stay on this device. The internet is only used when you choose to download a voice or import a board whose pictures are online.</string>
+    <string name="licences">Licences and credits</string>
+    <string name="credit_saywell">Saywell: GNU General Public License v3.0 or later.</string>
+    <string name="credit_openmoji">Symbols: OpenMoji, the open-source emoji and icon project (openmoji.org). License: CC BY-SA 4.0.</string>
+    <string name="credit_sherpa">Speech: Sherpa-ONNX (Apache 2.0) by the k2-fsa project, running Piper voices with ONNX Runtime (MIT).</string>
+    <string name="credit_espeak">Pronunciation: eSpeak NG (GPL 3.0).</string>
+    <string name="credit_voice">Built-in voice: %1$s (%2$s), a Piper voice. Its licence is in Settings › Saywell voices.</string>
+    <string name="credit_libraries">Built with Kotlin, Jetpack Compose, Coil and Apache Commons Compress (Apache 2.0).</string>
+    <string name="help_and_feedback">Help and feedback</string>
+    <string name="source_code">Source code</string>
+    <string name="report_problem">Report a problem or suggest an idea</string>
+    <string name="report_problem_summary">Opens the project\'s issue tracker on GitHub</string>
+</resources>

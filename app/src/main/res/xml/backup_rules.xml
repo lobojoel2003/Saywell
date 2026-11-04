@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 and older: back up boards, pictures and settings, but not voices (large and re-downloadable). -->
+<full-backup-content>
+    <include domain="file" path="." />
+    <exclude domain="file" path="voices/" />
+    <exclude domain="file" path="espeak-ng-data/" />
+</full-backup-content>

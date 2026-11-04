@@ -1,0 +1,16 @@
+{
+  "comment": "Piper voices packaged for Sherpa-ONNX. Only voices whose model card states a clear licence are listed; 'license' is the licence of the voice's training data from its MODEL_CARD, which the app also shows in full. CI checks every download link (scripts/check_voice_catalog.py).",
+  "baseUrl": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/",
+  "voices": [
+    { "id": "en_US-kristin-medium", "name": "Kristin", "language": "English (US)", "locale": "en-US", "gender": "female", "quality": "medium", "license": "public domain" },
+    { "id": "en_US-norman-medium", "name": "Norman", "language": "English (US)", "locale": "en-US", "gender": "male", "quality": "medium", "license": "public domain" },
+    { "id": "en_US-john-medium", "name": "John", "language": "English (US)", "locale": "en-US", "gender": "male", "quality": "medium", "license": "public domain" },
+    { "id": "en_US-bryce-medium", "name": "Bryce", "language": "English (US)", "locale": "en-US", "gender": "male", "quality": "medium", "license": "public domain" },
+    { "id": "en_GB-cori-medium", "name": "Cori", "language": "English (UK)", "locale": "en-GB", "gender": "female", "quality": "medium", "license": "public domain" },
+    { "id": "en_GB-alba-medium", "name": "Alba", "language": "English (UK)", "locale": "en-GB", "gender": "female", "quality": "medium", "license": "CC BY 4.0" },
+    { "id": "es_ES-davefx-medium", "name": "Davefx", "language": "Spanish (Spain)", "locale": "es-ES", "gender": "male", "quality": "medium", "license": "CC0" },
+    { "id": "es_MX-ald-medium", "name": "Ald", "language": "Spanish (Mexico)", "locale": "es-MX", "gender": "male", "quality": "medium", "license": "Unlicense" },
+    { "id": "de_DE-thorsten-medium", "name": "Thorsten", "language": "German", "locale": "de-DE", "gender": "male", "quality": "medium", "license": "CC0" },
+    { "id": "pt_BR-faber-medium", "name": "Faber", "language": "Portuguese (Brazil)", "locale": "pt-BR", "gender": "male", "quality": "medium", "license": "CC0" }
+  ]
+}

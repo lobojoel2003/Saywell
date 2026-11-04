@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12 and newer: back up and transfer boards, pictures and settings, but not voices. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="file" path="." />
+        <exclude domain="file" path="voices/" />
+        <exclude domain="file" path="espeak-ng-data/" />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="file" path="." />
+        <exclude domain="file" path="espeak-ng-data/" />
+    </device-transfer>
+</data-extraction-rules>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A speech bubble holding a grid of colour-coded word tiles. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,30 L72,30 Q82,30 82,40 L82,64 Q82,74 72,74 L50,74 L38,84 L40,74 L36,74 Q26,74 26,64 L26,40 Q26,30 36,30 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M37,37 L50,37 Q52,37 52,39 L52,49 Q52,51 50,51 L37,51 Q35,51 35,49 L35,39 Q35,37 37,37 Z" />
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M58,37 L71,37 Q73,37 73,39 L73,49 Q73,51 71,51 L58,51 Q56,51 56,49 L56,39 Q56,37 58,37 Z" />
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M37,55 L50,55 Q52,55 52,57 L52,65 Q52,67 50,67 L37,67 Q35,67 35,65 L35,57 Q35,55 37,55 Z" />
+    <path
+        android:fillColor="#F48FB1"
+        android:pathData="M58,55 L71,55 Q73,55 73,57 L73,65 Q73,67 71,67 L58,67 Q56,67 56,65 L56,57 Q56,55 58,55 Z" />
+</vector>
